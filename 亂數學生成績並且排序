@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CS20230321
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random RN=new Random();  //產生亂數
+            while (true)
+            {
+                try
+                {
+                    checked
+                    {
+                        Console.Write("\n INPUT number of Student？");  //輸入學生人數
+                        string[]Line= Console.ReadLine().Split(' ');
+                        int Number = int.Parse(Line[0]);
+                        int[] Scores = new int[Number];
+                        for(int i=0;i<Number; i++)
+                        {
+                            Scores[i]=RN.Next(0,101);
+                        }
+
+                        Console.Write("\n Unsorted Scores：");  //隨機產生且未排序的成績
+                        for (int i = 0; i < Number; i++)
+                        {
+                            Console.Write(Scores[i]+", ");
+                        }
+
+                        int temp;
+                        for (int i = 1; i < Number; i++)  //回和數
+                        {
+                            for (int j =1; j <= Number-i; j++)  //比較次數
+                            {
+                                if (Scores[j - 1] > Scores[j])
+                                {
+                                    temp = Scores[j - 1];
+                                    Scores[j - 1] = Scores[j];
+                                    Scores[j]= temp;
+                                }
+                            }
+                        }
+
+                        Console.Write("\n\n Sorted Scores(Ascending)：");  //成績排序由小到大
+                        for (int i = 0; i < Number; i++)
+                        {
+                            Console.Write(Scores[i] + ", ");
+                        }
+
+                        Console.Write("\n\n Sorted Scores(Descending)：");  //成績排序由大到小
+                        for (int i = Number-1; i >=0 ; i--)
+                        {
+                            Console.Write(Scores[i] + "; "); 
+                        }
+                        Console.WriteLine();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    //Console.WriteLine("Press any key try again! \n");
+                    Console.ReadKey();
+                }
+            }
+        }
+    }
+}
